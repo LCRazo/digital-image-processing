@@ -17,3 +17,6 @@ This project aims to perform various image processing tasks on a lung CT image. 
 
    ```bash
    git clone https://github.com/yourusername/lung-ct-image-processing.git
+
+   pip 24.0 (python 3.11)
+   pip install opencv-python
