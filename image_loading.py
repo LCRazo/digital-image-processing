@@ -1,27 +1,25 @@
-import nibabel as nib
-import numpy as np
-import matplotlib.pyplot as plt
-import os
+import cv2
 
 # Define a list of NIfTI file paths
-file_paths = ['tr_im.nii', 'tr_mask.nii']  # Add more file paths as needed
+file_path = 'lung_ct.jpg'
 
-for file_path in file_paths:
-    try:
-        # Load the NIfTI image and get the data
-        test_load = nib.load(file_path).get_fdata()
+try:
+    # Load the lung CT image as grayscale
+    lung_image = cv2.imread(file_path, cv2.IMREAD_GRAYSCALE)
 
-        # Display the shape of the loaded data
-        print(f"Shape of the loaded data ({file_path}):", test_load.shape)
+    # Display the image
+    cv2.imshow('Lung CT Image', lung_image)
+    cv2.waitKey(0)
+    cv2.destroyAllWindows()
 
-        # Additional code to visualize or process the data if needed
-        test = test_load[:, :, 59]
-        plt.imshow(test)
-        plt.title(file_path)
-        plt.show()
+    # Get size of the image
+    height, width = lung_image.shape
 
-    except FileNotFoundError:
-        print(f"File not found: {file_path}")
+    # Report size
+    print('Size of the image (M x N): {} x {}'. format(width, height))
 
-    except Exception as e:
-        print(f"An error occurred for {file_path}: {e}")
+except FileNotFoundError:
+    print("File not found: {file_path}")
+
+except Exception as e:
+    print(f"An error occurred for {file_path}: {e}")
