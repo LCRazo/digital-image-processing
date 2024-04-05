@@ -2,6 +2,7 @@ import cv2
 import numpy as np
 from matplotlib import pyplot as plt
 
+
 # Define a list of NIfTI file paths
 file_path = 'lung_ct.jpg'
 
@@ -52,11 +53,18 @@ axarr[0].set_title("Phase")
 axarr[1].set_title("Shifted Phase")
 plt.show()
 
-# Down-sample image by selecting every other row and column
-downsampled_image = lung_image[::2,::2]
 
-# Display the down-sampled image
-plt.imshow(downsampled_image, cmap = 'gray')
-plt.title('Down-sampled Image (M/2) x (N/2)')
-plt.axis('off')
+# Down-sample image by selecting every other row and column by a factor of 2
+downsampled_image = lung_image[::2, ::2]
+
+
+# Display the down-sampled image before and after
+plt.subplot(121), plt.imshow(lung_image, cmap = 'gray')
+plt.title('Original CT Scan')
+plt.subplot(122),plt.imshow(downsampled_image, cmap = 'gray')
+plt.title('Down-sampled Image')
+plt.axis('on')
 plt.show()
+
+
+
