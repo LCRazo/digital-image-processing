@@ -9,16 +9,14 @@ try:
     # Load the lung CT image as grayscale
     lung_image = cv2.imread(file_path, cv2.IMREAD_GRAYSCALE)
 
-    # Display the image
-    cv2.imshow('Lung CT Image', lung_image)
-    cv2.waitKey(0)
-    cv2.destroyAllWindows()
-
     # Get size of the image
     height, width = lung_image.shape
 
-    # Report size
-    print('Size of the image (M x N): {} x {}'. format(width, height))
+    # Display the image
+    plt.imshow(lung_image, cmap='gray')
+    plt.title('Lung CT Image'), plt.xticks([]), plt.yticks([])
+    plt.text(0, height + 20, f'Size of the image (M x N): {width} x {height}')
+    plt.show()
 
 except FileNotFoundError:
     print("File not found: {file_path}")
@@ -52,4 +50,13 @@ axarr[0].imshow(phase, cmap = 'gray')
 axarr[1].imshow(phase_shift, cmap = 'gray')
 axarr[0].set_title("Phase")
 axarr[1].set_title("Shifted Phase")
+plt.show()
+
+# Down-sample image by selecting every other row and column
+downsampled_image = lung_image[::2,::2]
+
+# Display the down-sampled image
+plt.imshow(downsampled_image, cmap = 'gray')
+plt.title('Down-sampled Image (M/2) x (N/2)')
+plt.axis('off')
 plt.show()
