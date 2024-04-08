@@ -7,7 +7,8 @@ This project aims to perform various image processing tasks on a lung CT image. 
 ## Table of Contents
 
 - [Installation](#installation)
-- [Usage](#usage)
+- [Features](#Features)
+- [Technologies](#technologies)
 - [Credits](#credits)
 - [License](#license)
 
@@ -20,3 +21,7 @@ This project aims to perform various image processing tasks on a lung CT image. 
 
    pip 24.0 (python 3.11)
    pip install opencv-python
+   
+## Features
+
+## Technologies
