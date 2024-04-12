@@ -61,10 +61,29 @@ downsampled_image = lung_image[::2, ::2]
 # Display the down-sampled image before and after
 plt.subplot(121), plt.imshow(lung_image, cmap = 'gray')
 plt.title('Original CT Scan')
-plt.subplot(122),plt.imshow(downsampled_image, cmap = 'gray')
+plt.subplot(122), plt.imshow(downsampled_image, cmap = 'gray')
 plt.title('Down-sampled Image')
 plt.axis('on')
 plt.show()
 
+# Get frequency domain for down sample image
+fft_downsampled_image = np.fft.fft2(downsampled_image)
 
+originalheight, originalwidth = lung_image.shape
+
+# Zero-pad FFT downsample image to original size
+padded_fft = np.pad(fft_downsampled_image, ((0, originalheight), (0, originalwidth)), mode='constant')
+
+# Compute the inverse 2D FFT
+interpolated_image = np.fft.ifft2(padded_fft)
+
+# Display the interpolated image
+plt.imshow(np.abs(interpolated_image), cmap='grey')
+plt.title('Magnitude of Reconstructed Image'), plt.xticks([]), plt.yticks([])
+plt.show()
+
+# Display the real part of the reconstructed image
+plt.imshow(np.real(interpolated_image), cmap='grey')
+plt.title('Real Part of Reconstructed Image'), plt.xticks([]), plt.yticks([])
+plt.show()
 
