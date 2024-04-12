@@ -1,7 +1,7 @@
 import cv2
 import numpy as np
 from matplotlib import pyplot as plt
-
+import scipy.ndimage as sci
 
 # Define a list of NIfTI file paths
 file_path = 'lung_ct.jpg'
@@ -55,7 +55,8 @@ plt.show()
 
 
 # Down-sample image by selecting every other row and column by a factor of 2
-downsampled_image = lung_image[::2, ::2]
+scale_factor = 2
+downsampled_image = lung_image[::scale_factor, ::scale_factor]
 
 
 # Display the down-sampled image before and after
@@ -75,15 +76,25 @@ originalheight, originalwidth = lung_image.shape
 padded_fft = np.pad(fft_downsampled_image, ((0, originalheight), (0, originalwidth)), mode='constant')
 
 # Compute the inverse 2D FFT
-interpolated_image = np.fft.ifft2(padded_fft)
+inverse_image = np.fft.ifft2(padded_fft)
 
 # Display the interpolated image
-plt.imshow(np.abs(interpolated_image), cmap='grey')
+plt.imshow(np.abs(inverse_image), cmap='grey')
 plt.title('Magnitude of Reconstructed Image'), plt.xticks([]), plt.yticks([])
 plt.show()
 
 # Display the real part of the reconstructed image
-plt.imshow(np.real(interpolated_image), cmap='grey')
+plt.imshow(np.real(inverse_image), cmap='grey')
 plt.title('Real Part of Reconstructed Image'), plt.xticks([]), plt.yticks([])
 plt.show()
 
+
+# Interpolate image from part 3
+interpolated_image = sci.zoom(downsampled_image, scale_factor, order=1)
+
+int_h, int_w = interpolated_image.shape
+
+plt.imshow(np.abs(interpolated_image), cmap='grey')
+plt.title('Interpolated Image'), plt.xticks([]), plt.yticks([])
+plt.text(0, int_h + 20, f'Size of the image (M x N): {int_w} x {int_h}')
+plt.show()
