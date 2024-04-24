@@ -2,6 +2,7 @@ import cv2
 import numpy as np
 from matplotlib import pyplot as plt
 import scipy.ndimage as sci
+from sklearn.metrics import mean_squared_error
 
 # Define a list of NIfTI file paths
 file_path = 'lung_ct.jpg'
@@ -71,16 +72,24 @@ plt.show()
 fft_downsampled_image = np.fft.fft2(downsampled_image)
 
 originalheight, originalwidth = lung_image.shape
+newheight, newwidth = fft_downsampled_image.shape
+print(newheight, newwidth)
+padding_amount_x = (originalwidth - newwidth)
+padding_amount_y = (originalheight - newheight)
 
 # Zero-pad FFT downsample image to original size
-padded_fft = np.pad(fft_downsampled_image, ((0, originalheight), (0, originalwidth)), mode='constant')
+padded_fft = np.pad(fft_downsampled_image, ((0, padding_amount_y), (0, padding_amount_x)), mode='constant')
 
 # Compute the inverse 2D FFT
 inverse_image = np.fft.ifft2(padded_fft)
+inverse_image = np.abs(inverse_image)
+
+inverse_h, inverse_w = inverse_image.shape
 
 # Display the interpolated image
-plt.imshow(np.abs(inverse_image), cmap='grey')
+plt.imshow(inverse_image, cmap='grey')
 plt.title('Magnitude of Reconstructed Image'), plt.xticks([]), plt.yticks([])
+plt.text(0, inverse_h + 20, f'Size of the image (M x N): {inverse_w} x {inverse_h}')
 plt.show()
 
 # Display the real part of the reconstructed image
@@ -88,13 +97,17 @@ plt.imshow(np.real(inverse_image), cmap='grey')
 plt.title('Real Part of Reconstructed Image'), plt.xticks([]), plt.yticks([])
 plt.show()
 
-
 # Interpolate image from part 3
 interpolated_image = sci.zoom(downsampled_image, scale_factor, order=1)
-
 int_h, int_w = interpolated_image.shape
 
 plt.imshow(np.abs(interpolated_image), cmap='grey')
 plt.title('Interpolated Image'), plt.xticks([]), plt.yticks([])
 plt.text(0, int_h + 20, f'Size of the image (M x N): {int_w} x {int_h}')
 plt.show()
+
+
+mse_1 = mean_squared_error(lung_image, inverse_image)
+mse_2 = mean_squared_error(lung_image, interpolated_image)
+print("MSE 1: " + str(mse_1) + " MSE 2: " + str(mse_2))
+
