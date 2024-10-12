@@ -23,5 +23,8 @@ This project aims to perform various image processing tasks on a lung CT image. 
    pip install opencv-python
    
 ## Features
+![alt text](https://raw.githubusercontent.com/LCRazo/digital-image-processing/refs/heads/main/magnitudeSpectrum.png)
+![alt text](https://raw.githubusercontent.com/LCRazo/digital-image-processing/refs/heads/main/downsample.png)
+![alt text](https://raw.githubusercontent.com/LCRazo/digital-image-processing/refs/heads/main/phases.png)
 
 ## Technologies
