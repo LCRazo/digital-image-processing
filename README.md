@@ -23,8 +23,13 @@ This project aims to perform various image processing tasks on a lung CT image. 
    pip install opencv-python
    
 ## Features
-![alt text](https://raw.githubusercontent.com/LCRazo/digital-image-processing/refs/heads/main/magnitudeSpectrum.png)
 ![alt text](https://raw.githubusercontent.com/LCRazo/digital-image-processing/refs/heads/main/downsample.png)
+fig.1 Shows the effects of reducing the resolution of a CT scan which leads to fewer pixels and the loss of fine details 
+
+![alt text](https://raw.githubusercontent.com/LCRazo/digital-image-processing/refs/heads/main/magnitudeSpectrum.png)
+fig.2 Represents the amplitude of different frequency components. After shifting, the low frequencies (main features of the image) are centered providing a clearer view of the distribution 
+
 ![alt text](https://raw.githubusercontent.com/LCRazo/digital-image-processing/refs/heads/main/phases.png)
+fig.3 Shifting helps visualize phase distribution around the image
 
 ## Technologies
