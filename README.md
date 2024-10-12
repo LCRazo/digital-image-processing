@@ -24,12 +24,12 @@ This project aims to perform various image processing tasks on a lung CT image. 
    
 ## Features
 ![alt text](https://raw.githubusercontent.com/LCRazo/digital-image-processing/refs/heads/main/downsample.png)
-fig.1 Shows the effects of reducing the resolution of a CT scan which leads to fewer pixels and the loss of fine details 
+<p align="left">fig.1 Shows the effects of reducing the resolution of a CT scan which leads to fewer pixels and the loss of fine details </p>
 
 ![alt text](https://raw.githubusercontent.com/LCRazo/digital-image-processing/refs/heads/main/magnitudeSpectrum.png)
-fig.2 Represents the amplitude of different frequency components. After shifting, the low frequencies (main features of the image) are centered providing a clearer view of the distribution 
+<p align="left">fig.2 Represents the amplitude of different frequency components. After shifting, the low frequencies (main features of the image) are centered providing a clearer view of the distribution </p>
 
 ![alt text](https://raw.githubusercontent.com/LCRazo/digital-image-processing/refs/heads/main/phases.png)
-fig.3 Shifting helps visualize phase distribution around the image
+<p align="right"> fig.3 Shifting helps visualize phase distribution around the image </p>
 
 ## Technologies
